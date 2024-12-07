@@ -4,12 +4,12 @@
   "description": "Shared components for chat app",
   "main": "index.tsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "start": "webpack serve",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --config eslint.config.mjs",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix --config eslint.config.mjs",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/trungh97/slack_shared_ui#readme",
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",
@@ -32,6 +32,9 @@
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.16.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
     "@types/react-dom": "^19.0.1",
     "@types/webpack": "^5.28.5",
@@ -44,10 +47,13 @@
     "globals": "^15.13.0",
     "html-webpack-plugin": "^5.6.3",
     "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.10",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^10.1.1",
     "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "style-loader": "^4.0.0",
     "tailwindcss": "^3.4.16",
     "ts-loader": "^9.5.1",

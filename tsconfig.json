@@ -8,7 +8,20 @@
     "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@assets/*": ["./assets/*"],
+      "@ui/*": ["./components/common/ui/*"],
+      "@pages/*": ["./pages/*"],
+      "@providers/*": ["./providers/*"],
+      "@constants/*": ["./constants/*"],
+      "@interfaces/*": ["./interfaces/*"],
+      "@redux/*": ["./redux/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@utils/*": ["./utils/*"],
+      "@routes/*": ["./routes/*"]
+    }
     // "noEmit": true
   },
   "exclude": ["node_modules"]

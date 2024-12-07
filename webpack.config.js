@@ -26,7 +26,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
-      favicon: path.join(__dirname, "public", "link.svg"),
+      favicon: path.join(__dirname, "public", "cloud.svg"),
     }),
   ],
   devtool: "source-map",

@@ -1,3 +1,4 @@
+import { Button } from '@components/Button';
 import React, { useState } from 'react';
 
 const Counter = () => {
@@ -15,22 +16,20 @@ const Counter = () => {
     <div className="text-center">
       <h1 className="text-3xl font-bold uppercase">Counter</h1>
       <div className="my-6 flex items-center justify-center gap-5">
-        <button
-          className="rounded-md border border-black bg-slate-300 p-2 hover:cursor-pointer"
+        <Button
+          intent="primary"
+          size="small"
           disabled={count === 0}
           onClick={decrement}
         >
           Decrement (-)
-        </button>
+        </Button>
         <span data-testid="counter-value" className="text-xl">
           {count}
         </span>
-        <button
-          className="rounded-md border border-black bg-slate-300 p-2 hover:cursor-pointer"
-          onClick={increment}
-        >
+        <Button intent="primary" size="small" onClick={increment}>
           Increment (+)
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "ES6",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -12,12 +13,10 @@
     "paths": {
       "@components/*": ["./components/*"],
       "@assets/*": ["./assets/*"],
-      "@ui/*": ["./components/common/ui/*"],
       "@pages/*": ["./pages/*"],
       "@providers/*": ["./providers/*"],
       "@constants/*": ["./constants/*"],
       "@interfaces/*": ["./interfaces/*"],
-      "@redux/*": ["./redux/*"],
       "@hooks/*": ["./hooks/*"],
       "@utils/*": ["./utils/*"],
       "@routes/*": ["./routes/*"]

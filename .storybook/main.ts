@@ -15,19 +15,6 @@ const config: StorybookConfig = {
     options: {},
   },
   webpackFinal: async (config) => {
-    console.log({
-      ...config,
-      module: {
-        ...config.module,
-        rules: [...config.module?.rules!, ...custom.module.rules],
-      },
-      resolve: {
-        alias: {
-          ...config.resolve?.alias,
-          ...custom.resolve.alias,
-        },
-      },
-    });
     return {
       ...config,
       resolve: {

@@ -10,7 +10,7 @@
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix --config eslint.config.mjs",
     "prepare": "husky",
     "test": "jest",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },
   "repository": {

@@ -17,19 +17,22 @@ const Counter = () => {
       <h1 className="text-3xl font-bold uppercase">Counter</h1>
       <div className="my-6 flex items-center justify-center gap-5">
         <Button
+          label="Decrement (-)"
           intent="primary"
-          size="small"
+          size="sm"
           disabled={count === 0}
           onClick={decrement}
-        >
-          Decrement (-)
-        </Button>
+        />
+
         <span data-testid="counter-value" className="text-xl">
           {count}
         </span>
-        <Button intent="primary" size="small" onClick={increment}>
-          Increment (+)
-        </Button>
+        <Button
+          label="Increment (+)"
+          intent="primary"
+          size="sm"
+          onClick={increment}
+        />
       </div>
     </div>
   );

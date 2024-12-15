@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@components/Button';
-import { SampleIcon, VectorIcon } from '@components/Icons';
+import { SampleIcon } from '@components/Icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 

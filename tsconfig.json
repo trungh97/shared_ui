@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "isolatedModules": true,
     "baseUrl": "src",
     "target": "ES6",
     "module": "ESNext",
@@ -19,9 +23,9 @@
       "@interfaces/*": ["./interfaces/*"],
       "@hooks/*": ["./hooks/*"],
       "@utils/*": ["./utils/*"],
-      "@routes/*": ["./routes/*"]
+      "@routes/*": ["./routes/*"],
+      "@types/*": ["./@mf-types/*"]
     }
-    // "noEmit": true
   },
   "exclude": ["node_modules"]
 }

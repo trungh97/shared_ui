@@ -1,7 +1,33 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+const FederatedTypesPlugin =
+  require('@module-federation/typescript').FederatedTypesPlugin;
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const deps = require('./package.json').dependencies;
+
+const federationConfig = {
+  name: 'ui',
+  filename: 'remoteEntry.js',
+  exposes: {
+    './Button': './src/components/Button',
+    './Icons': './src/components/Icons',
+    './Text': './src/components/Text',
+  },
+  shared: {
+    react: {
+      singleton: true,
+      eager: true,
+      requiredVersion: deps.react,
+    },
+    'react-dom': {
+      singleton: true,
+      eager: true,
+      requiredVersion: deps['react-dom'],
+    },
+  },
+};
 
 const config = {
   mode: isDevelopment ? 'development' : 'production',
@@ -24,6 +50,7 @@ const config = {
     ],
   },
   plugins: [
+    new ModuleFederationPlugin(federationConfig),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
       favicon: path.join(__dirname, 'public', 'cloud.svg'),
@@ -32,7 +59,7 @@ const config = {
   devtool: 'source-map',
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'),
+      directory: path.resolve(__dirname, 'dist'),
     },
     liveReload: true,
     port: 8080,
@@ -49,6 +76,7 @@ const config = {
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@routes': path.resolve(__dirname, 'src/routes'),
+      '@types': path.resolve(__dirname, 'src/@mf-types'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },

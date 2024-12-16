@@ -1,25 +1,37 @@
 import 'tailwindcss/tailwind.css';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, ReactElement, isValidElement } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { buttonIcon } from './ButtonIcon';
 
 const button = cva(
-  'shadow-button rounded-lg border font-semibold inline-flex justify-center items-center',
+  'shadow-button-normal rounded-lg border font-semibold inline-flex justify-center items-center',
   {
     variants: {
       intent: {
         primary: [
-          'bg-purple-500',
+          'bg-purple-600',
           'text-white',
-          'border-transparent',
-          'hover:bg-purple-600',
-          'border-purple-500',
+          'border-purple-600',
+          'hover:bg-purple-700',
+          'hover:border-purple-700',
+          'focus:border-purple-600',
+          'focus:shadow-button-focus',
+          'disabled:bg-brand-200',
+          'disabled:border-brand-200',
+          'disabled:cursor-not-allowed',
         ],
         secondary: [
-          'bg-white',
-          'text-gray-800',
-          'border-gray-400',
-          'hover:bg-gray-100',
+          'bg-brand-50',
+          'text-brand-700',
+          'border-brand-50',
+          'hover:bg-brand-100',
+          'hover:border-brand-100',
+          'focus:border-brand-50',
+          'focus:shadow-button-focus',
+          'disabled:bg-brand-50',
+          'disabled:border-brand-50',
+          'disabled:text-brand-300',
+          'disabled:cursor-not-allowed',
         ],
       },
       size: {
@@ -42,7 +54,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof button> {
   label: string;
-  icon?: React.ReactNode;
+  icon?: ReactElement;
   iconPosition?: 'leading' | 'trailing';
 }
 
@@ -65,12 +77,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ref={ref}
     >
       {icon && iconPosition === 'leading' && (
-        <span className={buttonIcon({ size })}>{icon}</span>
+        <span className={buttonIcon({ intent, size })}>
+          {isValidElement(icon) &&
+            React.cloneElement(icon, {
+              className: buttonIcon({ intent, size }),
+            } as any)}
+        </span>
       )}
       {label}
       {icon && iconPosition === 'trailing' && (
-        <span className={buttonIcon({ size, position: iconPosition })}>
-          {icon}
+        <span className={buttonIcon({ intent, size, position: iconPosition })}>
+          {isValidElement(icon) &&
+            React.cloneElement(icon, {
+              className: buttonIcon({ intent, size }),
+            } as any)}
         </span>
       )}
     </button>

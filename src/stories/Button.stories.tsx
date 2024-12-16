@@ -38,98 +38,16 @@ export const Secondary: Story = {
   args: {
     intent: 'secondary',
     label: 'Button CTA',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    label: 'Button CTA',
-  },
-};
-
-export const Medium: Story = {
-  args: {
-    size: 'md',
-    label: 'Button CTA',
-  },
-};
-
-export const Large: Story = {
-  args: {
+    icon: <SampleIcon />,
     size: 'lg',
-    label: 'Button CTA',
   },
 };
 
-export const ExtraLarge: Story = {
+export const Disabled: Story = {
   args: {
-    size: 'xl',
+    intent: 'primary',
     label: 'Button CTA',
-  },
-};
-
-export const ExtraExtraLarge: Story = {
-  args: {
-    size: '2xl',
-    label: 'Button CTA',
-  },
-};
-
-export const SmallWithIcon: Story = {
-  args: {
-    size: 'sm',
-    label: 'Button CTA',
-    icon: <SampleIcon />,
-  },
-};
-
-export const MediumWithIcon: Story = {
-  args: {
-    size: 'md',
-    label: 'Button CTA',
-    icon: <SampleIcon />,
-  },
-};
-
-export const LargeWithIcon: Story = {
-  args: {
-    size: 'lg',
-    label: 'Button CTA',
-    icon: <SampleIcon />,
-  },
-};
-
-export const ExtraLargeWithIcon: Story = {
-  args: {
-    size: 'xl',
-    label: 'Button CTA',
-    icon: <SampleIcon />,
-  },
-};
-
-export const ExtraExtraLargeWithIcon: Story = {
-  args: {
-    size: '2xl',
-    label: 'Button CTA',
-    icon: <SampleIcon />,
-  },
-};
-
-export const SmallWithTrailingIcon: Story = {
-  args: {
-    size: 'sm',
-    label: 'Button CTA',
-    iconPosition: 'trailing',
-    icon: <SampleIcon />,
-  },
-};
-
-export const ExtraExtraLargeWithTrailingIcon: Story = {
-  args: {
-    size: '2xl',
-    label: 'Button CTA',
-    iconPosition: 'trailing',
+    disabled: true,
     icon: <SampleIcon />,
   },
 };

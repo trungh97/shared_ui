@@ -5,12 +5,10 @@ const SampleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width={props.width || 20}
     height={props.height || 20}
-    fill="none"
-    {...props}
+    fill={'none'}
   >
     <g clipPath="url(#a)">
       <path
-        stroke="#fff"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.67}
@@ -19,7 +17,7 @@ const SampleIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id="a">
-        <path fill="#fff" d="M0 0h20v20H0z" />
+        <path fill={'#fff'} d="M0 0h20v20H0z" />
       </clipPath>
     </defs>
   </svg>

@@ -13,6 +13,10 @@ export const buttonIcon = cva('inline-flex items-center justify-center', {
       leading: ['mr-2'],
       trailing: ['ml-2'],
     },
+    intent: {
+      primary: 'stroke-white',
+      secondary: 'stroke-brand-700',
+    },
   },
   compoundVariants: [
     { position: 'leading', size: '2xl', className: 'mr-3' },
@@ -21,5 +25,6 @@ export const buttonIcon = cva('inline-flex items-center justify-center', {
   defaultVariants: {
     position: 'leading',
     size: 'md',
+    intent: 'primary',
   },
 });

@@ -5,7 +5,7 @@
   "main": "index.tsx",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack serve",
+    "start": "webpack serve --mode development",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --config eslint.config.mjs",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix --config eslint.config.mjs",
     "prepare": "husky",

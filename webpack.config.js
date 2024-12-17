@@ -62,6 +62,7 @@ const config = {
       directory: path.resolve(__dirname, 'dist'),
     },
     liveReload: true,
+    hot: true,
     port: 8080,
     historyApiFallback: true,
   },

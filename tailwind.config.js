@@ -58,11 +58,20 @@ module.exports = {
         800: '#4A1FB8',
         900: '#3E1C96',
       },
+      social: {
+        facebook: {
+          standard: '#1877F2',
+          hover: '#0C63D4',
+        },
+      },
     },
     extend: {
       boxShadow: {
         'button-normal': '0px 1px 2px rgba(10, 12.67, 18, 0.05)',
         'button-focus': '0px 0px 0px 4px #F4EBFF',
+        'social-button-standard': '0px 1px 2px 0px rgba(10, 13, 18, 0.05)',
+        'social-button-focus':
+          '0px 1px 2px 0px rgba(10, 13, 18, 0.05), 0px 0px 0px 4px #F5F5F5',
       },
     },
   },

@@ -12,6 +12,7 @@ const federationConfig = {
   filename: 'remoteEntry.js',
   exposes: {
     './Button': './src/components/Button',
+    './SocialButon': './src/components/Button/SocialButton',
     './Icons': './src/components/Icons',
     './Text': './src/components/Text',
   },
@@ -51,6 +52,9 @@ const config = {
   },
   plugins: [
     new ModuleFederationPlugin(federationConfig),
+    new FederatedTypesPlugin({
+      federationConfig,
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
       favicon: path.join(__dirname, 'public', 'cloud.svg'),

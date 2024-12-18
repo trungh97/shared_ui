@@ -1,35 +1,27 @@
-import 'tailwindcss/tailwind.css';
+// import 'tailwindcss/tailwind.css';
 import React, { forwardRef, ReactElement, isValidElement } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { buttonIcon } from './ButtonIcon';
 
 const button = cva(
-  'shadow-button-normal rounded-lg border font-semibold inline-flex justify-center items-center',
+  'shadow-button-normal rounded-lg font-semibold inline-flex justify-center items-center',
   {
     variants: {
       intent: {
         primary: [
           'bg-purple-600',
           'text-white',
-          'border-purple-600',
           'hover:bg-purple-700',
-          'hover:border-purple-700',
-          'focus:border-purple-600',
           'focus:shadow-button-focus',
           'disabled:bg-brand-200',
-          'disabled:border-brand-200',
           'disabled:cursor-not-allowed',
         ],
         secondary: [
           'bg-brand-50',
           'text-brand-700',
-          'border-brand-50',
           'hover:bg-brand-100',
-          'hover:border-brand-100',
-          'focus:border-brand-50',
           'focus:shadow-button-focus',
           'disabled:bg-brand-50',
-          'disabled:border-brand-50',
           'disabled:text-brand-300',
           'disabled:cursor-not-allowed',
         ],
@@ -63,7 +55,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       size,
-      intent,
+      intent = 'primary',
       label,
       icon,
       iconPosition = 'leading',
@@ -86,7 +78,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )}
       {label}
       {icon && iconPosition === 'trailing' && (
-        <span className={buttonIcon({ intent, size, position: iconPosition })}>
+        <span
+          className={buttonIcon({
+            intent,
+            size,
+            position: iconPosition,
+          })}
+        >
           {isValidElement(icon) &&
             React.cloneElement(icon, {
               className: buttonIcon({ intent, size }),

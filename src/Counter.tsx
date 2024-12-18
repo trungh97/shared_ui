@@ -1,4 +1,5 @@
 import { Button } from '@components/Button';
+import { FacebookIcon, GoogleIcon } from '@components/Icons';
 import React, { useState } from 'react';
 
 const Counter = () => {
@@ -31,6 +32,7 @@ const Counter = () => {
           label="Increment (+)"
           intent="primary"
           size="sm"
+          icon={<FacebookIcon />}
           onClick={increment}
         />
       </div>

@@ -31,6 +31,7 @@ export const Primary: Story = {
     intent: 'primary',
     label: 'Button CTA',
     icon: <SampleIcon />,
+    size: 'lg',
   },
 };
 

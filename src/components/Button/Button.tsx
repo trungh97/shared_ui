@@ -2,6 +2,7 @@
 import React, { forwardRef, ReactElement, isValidElement } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { buttonIcon } from './ButtonIcon';
+// import '../../main.css';
 
 const button = cva(
   'shadow-button-normal rounded-lg font-semibold inline-flex justify-center items-center',

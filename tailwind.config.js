@@ -72,6 +72,9 @@ module.exports = {
         'social-button-standard': '0px 1px 2px 0px rgba(10, 13, 18, 0.05)',
         'social-button-focus':
           '0px 1px 2px 0px rgba(10, 13, 18, 0.05), 0px 0px 0px 4px #F5F5F5',
+        input: '0px 1px 2px 0px rgba(10, 13, 18, 0.05)',
+        'input-focus':
+          '0px 1px 2px 0px rgba(10, 13, 18, 0.05), 0px 0px 0px 4px #F4EBFF',
       },
     },
   },

@@ -34,15 +34,15 @@ module.exports = {
       error: {
         25: '#FFFBFA',
         50: '#FEF3F2',
-        100: '#F4EBFF',
-        200: '#E9D7FE',
-        300: '#D6BBFB',
-        400: '#B692F6',
-        500: '#9E77ED',
-        600: '#7F56D9',
-        700: '#6941C6',
-        800: '#53389E',
-        900: '#42307D',
+        100: '#FEE4E2',
+        200: '#FECDCA',
+        300: '#FDA29B',
+        400: '#F97066',
+        500: '#F04438',
+        600: '#D92D20',
+        700: '#B42318',
+        800: '#912018',
+        900: '#7A271A',
       },
       white: '#fff',
       purple: {
@@ -75,6 +75,8 @@ module.exports = {
         input: '0px 1px 2px 0px rgba(10, 13, 18, 0.05)',
         'input-focus':
           '0px 1px 2px 0px rgba(10, 13, 18, 0.05), 0px 0px 0px 4px #F4EBFF',
+        'error-input-focus':
+          '0px 1px 2px 0px rgba(10, 13, 18, 0.05), 0px 0px 0px 4px #FEE4E2',
       },
     },
   },

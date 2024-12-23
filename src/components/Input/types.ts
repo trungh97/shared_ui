@@ -1,1 +1,1 @@
-export type InputType = 'default' | 'leading-icon';
+export type InputType = 'default' | 'leading-icon' | 'trailing-icon' | 'error';

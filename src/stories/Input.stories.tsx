@@ -26,5 +26,6 @@ export const Standard: Story = {
     placeholder: 'olivia@untitledui.com',
     disabled: false,
     icon: <MailIcon />,
+    message: 'This is an error message',
   },
 };

@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import React, { forwardRef, ReactElement } from 'react';
 import { ErrorCircleIcon } from '@components/Icons';
 
-import { InputType } from './types';
+import { InputVariant } from './types';
 
 const styles = cva(
   [
@@ -22,7 +22,7 @@ const styles = cva(
   ],
   {
     variants: {
-      type: {
+      variant: {
         default: [
           'focus-within:border-brand-300',
           'focus-within:shadow-input-focus',
@@ -84,18 +84,21 @@ const InputElement = forwardRef<HTMLInputElement, InputElementProps>(
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof styles> {
-  type?: InputType;
+  variant?: InputVariant;
   disabled?: boolean;
   icon?: ReactElement;
   message?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = 'default', className, disabled, icon, message, ...props }, ref) => {
+  (
+    { variant = 'default', className, disabled, icon, message, ...props },
+    ref,
+  ) => {
     return (
       <>
-        <div className={styles({ type, disabled, className })}>
-          {icon && type === 'leading-icon' && (
+        <div className={styles({ variant, disabled, className })}>
+          {icon && variant === 'leading-icon' && (
             <span className={inputIcon()}>{icon}</span>
           )}
           <InputElement
@@ -104,16 +107,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             {...props}
           />
-          {type === 'error' && (
+          {variant === 'error' && (
             <span className={inputIcon()}>
               <ErrorCircleIcon />
             </span>
           )}
-          {icon && type === 'trailing-icon' && (
+          {icon && variant === 'trailing-icon' && (
             <span className={inputIcon()}>{icon}</span>
           )}
         </div>
-        {type === 'error' && (
+        {variant === 'error' && (
           <span className="mt-2 text-sm text-error-500">{message}</span>
         )}
       </>

@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Standard: Story = {
   args: {
-    type: 'default',
+    variant: 'default',
     placeholder: 'olivia@untitledui.com',
     disabled: false,
     icon: <MailIcon />,

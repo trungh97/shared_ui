@@ -1,23 +1,18 @@
 import React, { ReactNode } from 'react';
 import { useFormContext } from './FormContext';
+import { FormProvider } from './FormProvider';
 
 interface FormProps {
   onSubmit: (values: Record<string, any>) => void;
   children: ReactNode;
 }
 
-export const Form: React.FC<FormProps> = ({ onSubmit, children }) => {
-  const { values, errors } = useFormContext();
-
-  const isNoError = (errors: Record<string, string>) => {
-    if (Object.keys(errors).length === 0) return false;
-
-    return Object.keys(errors).find((key) => errors[key] !== '') === undefined;
-  };
+const FormComponent: React.FC<FormProps> = ({ onSubmit, children }) => {
+  const { values, errors, validateAll } = useFormContext();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isNoError(errors)) {
+    if (validateAll()) {
       onSubmit(values);
     } else {
       console.error('Validation errors:', errors);
@@ -25,9 +20,17 @@ export const Form: React.FC<FormProps> = ({ onSubmit, children }) => {
   };
 
   return (
-    <form className="justify-start text-left" onSubmit={handleSubmit}>
+    <form className="text-left" onSubmit={handleSubmit}>
       {children}
     </form>
+  );
+};
+
+export const Form: React.FC<FormProps> = ({ onSubmit, children }) => {
+  return (
+    <FormProvider>
+      <FormComponent onSubmit={onSubmit}>{children}</FormComponent>
+    </FormProvider>
   );
 };
 

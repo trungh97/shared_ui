@@ -1,5 +1,5 @@
 import { cva, VariantProps } from 'class-variance-authority';
-import React, { forwardRef, ReactElement } from 'react';
+import React, { forwardRef, ReactElement, ReactNode } from 'react';
 import { ErrorCircleIcon } from '@components/Icons';
 
 import { InputVariant } from './types';
@@ -53,7 +53,7 @@ const styles = cva(
 );
 
 const inputElementStyles = cva(
-  'outline-none disabled:cursor-not-allowed disabled:bg-gray-50',
+  'outline-none disabled:cursor-not-allowed disabled:bg-gray-50 w-full',
   {
     variants: {},
   },
@@ -88,15 +88,27 @@ export interface InputProps
   disabled?: boolean;
   icon?: ReactElement;
   message?: string;
+  label?: ReactNode;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { variant = 'default', className, disabled, icon, message, ...props },
+    {
+      variant = 'default',
+      className,
+      disabled,
+      icon,
+      message,
+      label,
+      ...props
+    },
     ref,
   ) => {
     return (
-      <>
+      <div className="my-4 flex flex-col gap-y-2">
+        {label && (
+          <label className="text-sm font-medium text-gray-700">{label}</label>
+        )}
         <div className={styles({ variant, disabled, className })}>
           {icon && variant === 'leading-icon' && (
             <span className={inputIcon()}>{icon}</span>
@@ -117,9 +129,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {variant === 'error' && (
-          <span className="mt-2 text-sm text-error-500">{message}</span>
+          <span className="text-sm text-error-500">{message}</span>
         )}
-      </>
+      </div>
     );
   },
 );

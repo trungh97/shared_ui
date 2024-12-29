@@ -1,0 +1,19 @@
+# Exclude tests, docs, and configuration files
+# node_modules
+# test
+# coverage
+# *.log
+# *.md
+# .git
+# .vscode
+# .eslint*
+# .prettier*
+# .husky
+# .storybook
+# src
+# public
+# *.config.*
+!tailwind.config.js
+!index.d.ts
+!tailwind.css
+!dist/**

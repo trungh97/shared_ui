@@ -8,10 +8,12 @@
     "target": "ES6",
     "module": "ESNext",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "jsx": "react-jsx",
     "outDir": "dist",
     "esModuleInterop": true,
     "strict": true,
+    "lib": ["dom", "ES2016"],
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
@@ -25,7 +27,11 @@
       "@utils/*": ["./utils/*"],
       "@routes/*": ["./routes/*"],
       "@types/*": ["./@mf-types/*"]
-    }
+    },
+    "plugins": [{ "transform": "typescript-transform-paths" }]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
 }

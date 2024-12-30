@@ -1,4 +1,3 @@
-import 'tailwindcss/tailwind.css';
 import { GoogleGrayIcon, GoogleIcon } from '@components/Icons';
 import { cva, VariantProps } from 'class-variance-authority';
 import React, { forwardRef, ReactElement } from 'react';

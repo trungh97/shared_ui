@@ -1,4 +1,3 @@
-import 'tailwindcss/tailwind.css';
 import React, { forwardRef, ReactElement, isValidElement } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { buttonIcon } from './ButtonIcon';

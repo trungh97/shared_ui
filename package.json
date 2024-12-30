@@ -1,17 +1,30 @@
 {
   "name": "slack-shared-ui",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "description": "Shared components for chat app",
-  "main": "index.tsx",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "exports": {
+    ".": "./dist/index.js",
+    "./components": "./dist/components/*",
+    "./tailwind.config.js": "./tailwind.config.js"
+  },
   "scripts": {
-    "build": "webpack --mode production",
+    "build:js": "webpack --mode production",
+    "build:types": "tspc",
+    "build": "npm run build:js && npm run build:types",
     "start": "webpack serve --mode development",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --config eslint.config.mjs",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix --config eslint.config.mjs",
     "prepare": "husky",
+    "transpile-css": "npx tailwindcss -i ./src/main.css -o ./dist/tailwind.css",
     "test": "jest",
     "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "rebuild:powershell": "Remove-Item -Recurse -Force dist; npm run build",
+    "rebuild:cmd": "rmdir /s /q dist && npm run build"
   },
   "repository": {
     "type": "git",
@@ -46,10 +59,12 @@
     "@storybook/react": "^8.4.7",
     "@storybook/react-webpack5": "^8.4.7",
     "@storybook/test": "^8.4.7",
+    "@storybook/types": "^8.4.7",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
+    "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.1",
     "@types/webpack": "^5.28.5",
     "@webpack-cli/generators": "^3.0.7",
@@ -74,8 +89,11 @@
     "tailwindcss": "^3.4.16",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
+    "ts-patch": "^3.3.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.17.0",
+    "typescript-transform-paths": "^3.5.3",
     "webpack": "^5.96.1",
     "webpack-dev-server": "^5.1.0"
   },
@@ -86,5 +104,9 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
-  }
+  },
+  "files": [
+    "dist/**/*",
+    "tailwind.config.js"
+  ]
 }

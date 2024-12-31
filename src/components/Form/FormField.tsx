@@ -8,13 +8,15 @@ import { composeRules, RuleType } from './validators';
 
 interface InputProps extends InputComponentProps {
   name: string;
+  wrapperClassName?: string;
   rules?: { type: RuleType; message?: string }[];
 }
 
-const FormField: React.FC<InputProps> = ({
+export const FormField: React.FC<InputProps> = ({
   name,
   rules = [],
   variant,
+  wrapperClassName,
   ...props
 }) => {
   const composedRules = composeRules(rules);
@@ -64,7 +66,7 @@ const FormField: React.FC<InputProps> = ({
   }, []);
 
   return (
-    <div>
+    <div className={wrapperClassName}>
       <Input
         variant={errors[name] ? 'error' : variant}
         {...(errors[name] && { message: errors[name] })}

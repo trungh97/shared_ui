@@ -105,7 +105,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref,
   ) => {
     return (
-      <div className="my-4 flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-2">
         {label && (
           <label className="text-sm font-medium text-gray-700">{label}</label>
         )}

@@ -1,12 +1,13 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import React, { forwardRef, ReactNode } from 'react';
+import type { BadgeColor, BadgeSize } from './types';
 
-const styles = cva(
-  'text-center rounded-2xl px-2 py-0.5 flex justify-center items-center',
+export const badgeStyles = cva(
+  'text-center rounded-2xl flex justify-center items-center',
   {
     variants: {
       size: {
-        sm: ['text-xs'],
+        sm: ['text-xs', 'px-2', 'py-0.5'],
         md: ['text-sm', 'px-2.5', 'py-0.5'],
         lg: ['text-sm', 'px-3', 'py-1'],
       },
@@ -21,21 +22,10 @@ const styles = cva(
   },
 );
 
-// TODO: Add more colors
-// | 'blue'
-// | 'blue-gray'
-// | 'blue-light'
-// | 'indigo'
-// | 'purple'
-// | 'pink'
-// | 'rose'
-// | 'orange';
-type BadgeColor = 'gray' | 'primary' | 'success' | 'warning' | 'error';
-
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof styles> {
-  size?: 'sm' | 'md' | 'lg';
+    VariantProps<typeof badgeStyles> {
+  size?: BadgeSize;
   icon?: ReactNode;
   iconPosition?: 'leading' | 'trailing';
   color?: BadgeColor;
@@ -44,7 +34,7 @@ export interface BadgeProps
 
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
   ({ content, size = 'sm', color = 'primary', className }, ref) => (
-    <div ref={ref} className={styles({ size, color, className })}>
+    <div ref={ref} className={badgeStyles({ size, color, className })}>
       {content}
     </div>
   ),

@@ -104,6 +104,20 @@ module.exports = {
         'error-input-focus':
           '0px 1px 2px 0px rgba(10, 13, 18, 0.05), 0px 0px 0px 4px #FEE4E2',
       },
+      keyframes: {
+        'message-fade-in': {
+          '0%': { opacity: 0, transform: 'translateY(-10px) translateX(-50%)' },
+          '100%': { opacity: 1, transform: 'translateY(0) translateX(-50%)' },
+        },
+        'fade-out': {
+          from: { opacity: 1 },
+          to: { opacity: 0 },
+        },
+      },
+      animation: {
+        'message-fade-in':
+          'message-fade-in 0.3s ease-in-out forwards, fade-out 0.3s ease 2.7s forwards',
+      },
     },
   },
   plugins: [],

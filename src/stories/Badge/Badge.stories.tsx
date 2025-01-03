@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react/*';
 import { fn } from '@storybook/test';
 import { Badge } from '@components/Badge';
 
-const meta = {
-  title: 'Example/Badge',
+const badgeMeta = {
+  title: 'Example/Badge/Badge',
   component: Badge,
   parameters: {
     layout: 'centered',
@@ -15,9 +15,9 @@ const meta = {
   },
 } satisfies Meta<typeof Badge>;
 
-export default meta;
+export default badgeMeta;
 
-type BadgeStory = StoryObj<typeof meta>;
+type BadgeStory = StoryObj<typeof badgeMeta>;
 
 export const Standard: BadgeStory = {
   args: {

@@ -1,5 +1,5 @@
 {
-  "name": "slack-shared-ui",
+  "name": "shared-ui",
   "version": "1.0.7",
   "description": "Shared components for chat app",
   "main": "dist/index.js",
@@ -28,17 +28,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/trungh97/slack_shared_ui.git"
+    "url": "git+https://github.com/trungh97/shared_ui.git"
   },
   "author": "hqtrung",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/trungh97/slack_shared_ui/issues"
+    "url": "https://github.com/trungh97/shared_ui/issues"
   },
-  "homepage": "https://github.com/trungh97/slack_shared_ui#readme",
+  "homepage": "https://github.com/trungh97/shared_ui#readme",
   "dependencies": {
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwind-merge": "^2.6.0"

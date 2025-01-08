@@ -17,14 +17,18 @@ export const buttonIcon = cva('inline-flex items-center justify-center', {
       primary: 'stroke-white',
       secondary: 'stroke-brand-700',
     },
+    iconOnly: {
+      true: ['mr-0', 'ml-0'],
+    },
   },
   compoundVariants: [
-    { position: 'leading', size: '2xl', className: 'mr-3' },
-    { position: 'trailing', size: '2xl', className: 'ml-3' },
+    { position: 'leading', size: '2xl', iconOnly: false, className: 'mr-3' },
+    { position: 'trailing', size: '2xl', iconOnly: false, className: 'ml-3' },
   ],
   defaultVariants: {
     position: 'leading',
     size: 'md',
+    iconOnly: false,
     intent: 'primary',
   },
 });

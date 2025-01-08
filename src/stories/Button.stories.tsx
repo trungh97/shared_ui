@@ -30,7 +30,11 @@ export const Primary: Story = {
   args: {
     intent: 'primary',
     label: 'Button CTA',
-    icon: <SampleIcon />,
+    icon: {
+      content: <SampleIcon />,
+      position: 'leading',
+      iconOnly: false,
+    },
     size: 'lg',
   },
 };
@@ -39,7 +43,9 @@ export const Secondary: Story = {
   args: {
     intent: 'secondary',
     label: 'Button CTA',
-    icon: <SampleIcon />,
+    icon: {
+      content: <SampleIcon />,
+    },
     size: 'lg',
   },
 };
@@ -49,6 +55,20 @@ export const Disabled: Story = {
     intent: 'primary',
     label: 'Button CTA',
     disabled: true,
-    icon: <SampleIcon />,
+    icon: {
+      content: <SampleIcon />,
+    },
+  },
+};
+
+export const IconOnly: Story = {
+  args: {
+    intent: 'primary',
+    icon: {
+      content: <SampleIcon />,
+      position: 'leading',
+      iconOnly: true,
+    },
+    size: 'lg',
   },
 };

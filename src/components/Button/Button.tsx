@@ -57,13 +57,11 @@ export interface ButtonProps
     VariantProps<typeof button> {
   label?: string;
   size?: ButtonSize;
-  icon:
-    | {
-        content: ReactElement;
-        iconOnly?: boolean;
-        position?: 'leading' | 'trailing';
-      }
-    | undefined;
+  icon?: {
+    content: ReactElement;
+    iconOnly?: boolean;
+    position?: 'leading' | 'trailing';
+  };
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(

@@ -39,7 +39,9 @@ const Counter = () => {
           label="Increment (+)"
           intent="primary"
           size="sm"
-          icon={<FacebookIcon />}
+          icon={{
+            content: <FacebookIcon />,
+          }}
           onClick={increment}
         />
       </div>

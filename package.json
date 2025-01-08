@@ -108,7 +108,8 @@
     ]
   },
   "files": [
-    "dist/**/*",
+    "dist/components/**/*",
+    "dist/index.d.ts",
     "tailwind.config.js"
   ]
 }

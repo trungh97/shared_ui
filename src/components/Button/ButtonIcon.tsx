@@ -18,7 +18,7 @@ export const buttonIcon = cva('inline-flex items-center justify-center', {
       secondary: 'stroke-brand-700',
     },
     iconOnly: {
-      true: ['mr-0', 'ml-0'],
+      true: ['!mr-0', '!ml-0'],
     },
   },
   compoundVariants: [

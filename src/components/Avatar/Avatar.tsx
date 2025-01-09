@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { AvatarSize } from './types';
 
-const avatarStyles = cva('bg-cover bg-center rounded-full', {
+const avatarStyles = cva('rounded-full object-cover', {
   variants: {
     size: {
       xs: ['w-6', 'h-6'],
@@ -16,7 +16,7 @@ const avatarStyles = cva('bg-cover bg-center rounded-full', {
 });
 
 export interface AvatarProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends React.HTMLAttributes<HTMLImageElement>,
     VariantProps<typeof avatarStyles> {
   size?: AvatarSize;
   imageUrl: string;
@@ -26,14 +26,17 @@ export const Avatar: React.FC<AvatarProps> = ({
   size = 'md',
   imageUrl,
   className,
+  ...props
 }) => {
-  const backgroundImage = `url(${imageUrl})`;
-
   return (
-    <div
+    <img
+      src={imageUrl}
       className={avatarStyles({ size, className })}
-      style={{ backgroundImage }}
-    ></div>
+      loading="lazy"
+      alt="avatar"
+      referrerPolicy="no-referrer"
+      {...props}
+    />
   );
 };
 

@@ -30,6 +30,7 @@ export interface GoogleSignInButtonProps
     VariantProps<typeof button> {
   theme?: Theme;
   supportingText?: boolean;
+  customText?: string;
 }
 
 const icon: Record<Theme, ReactElement> = {
@@ -41,17 +42,22 @@ const icon: Record<Theme, ReactElement> = {
 const GoogleSignInButton = forwardRef<
   HTMLButtonElement,
   GoogleSignInButtonProps
->(({ className, theme = 'brand', supportingText = true, ...props }, ref) => {
-  return (
-    <button
-      className={button({ theme, supportingText, className })}
-      {...props}
-      ref={ref}
-    >
-      {icon[theme]}
-      {supportingText && <span>Sign in with Google</span>}
-    </button>
-  );
-});
+>(
+  (
+    { className, theme = 'brand', supportingText = true, customText, ...props },
+    ref,
+  ) => {
+    return (
+      <button
+        className={button({ theme, supportingText, className })}
+        {...props}
+        ref={ref}
+      >
+        {icon[theme]}
+        {supportingText && <span>{customText || 'Continue with Google'}</span>}
+      </button>
+    );
+  },
+);
 
 export default GoogleSignInButton;

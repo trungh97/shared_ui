@@ -23,5 +23,6 @@ export const Standard: GoogleStory = {
   args: {
     theme: 'brand',
     supportingText: true,
+    customText: 'Continue with Google',
   },
 };

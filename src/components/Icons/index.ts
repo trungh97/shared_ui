@@ -5,4 +5,7 @@ export { default as ErrorCircleIcon } from './ErrorCircleIcon';
 export { default as UserIcon } from './UserIcon';
 export { default as MessageIcon } from './MessageIcon';
 export { default as BookIcon } from './BookIcon';
+export { default as SearchIcon } from './SearchIcon';
+export { default as AddIcon } from './AddIcon';
+export { default as FilterIcon } from './FilterIcon';
 export * from './SocialMedia';

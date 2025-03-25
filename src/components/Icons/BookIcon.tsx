@@ -10,7 +10,7 @@ const BookIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#181D27"
+      stroke={props.color || '#181D27'}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

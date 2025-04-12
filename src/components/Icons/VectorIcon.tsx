@@ -10,7 +10,7 @@ const VectorIcon = (props: React.SVGProps<SVGSVGElement>) => {
       {...props}
     >
       <path
-        stroke="#181D27"
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}

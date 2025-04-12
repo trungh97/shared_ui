@@ -6,11 +6,11 @@ export const AddIcon = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width={24}
     height={24}
-    fill="none"
+    fill="currentColor"
     {...props}
   >
     <path
-      stroke={props.color || '#181D27'}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

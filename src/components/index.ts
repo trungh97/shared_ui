@@ -6,3 +6,4 @@ export * from './Input';
 export * from './Badge';
 export * from './Message';
 export * from './Avatar';
+export * from './Divider';

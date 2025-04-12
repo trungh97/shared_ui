@@ -10,7 +10,7 @@ const FilterIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke={props.color || '#181D27'}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

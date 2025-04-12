@@ -9,7 +9,7 @@ const MailIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke={props.color || '#717680'}
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.667}

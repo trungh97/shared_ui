@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/trungh97/shared_ui#readme",
   "dependencies": {
+    "@floating-ui/react": "^0.27.8",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

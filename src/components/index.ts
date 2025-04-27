@@ -7,3 +7,4 @@ export * from './Badge';
 export * from './Message';
 export * from './Avatar';
 export * from './Divider';
+export * from './Popover';

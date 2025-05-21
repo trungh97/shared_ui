@@ -8,3 +8,4 @@ export * from './Message';
 export * from './Avatar';
 export * from './Divider';
 export * from './Popover';
+export * from './Skeleton';

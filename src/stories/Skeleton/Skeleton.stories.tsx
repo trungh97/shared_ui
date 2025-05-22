@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Skeleton } from '@components/Skeleton';
 
 const meta: Meta<typeof Skeleton> = {
-  title: 'Example/Skeleton',
+  title: 'Components/Skeleton',
   component: Skeleton,
   argTypes: {
     shape: {

@@ -29,6 +29,15 @@ export interface AvatarSkeletonProps
   shape?: AvatarShape;
 }
 
+/**
+ * A skeleton component to show a loading state of an avatar.
+ *
+ * @param {boolean} [active=true] - Show animation effect.
+ * @param {AvatarShape} [shape='circle'] - The shape of the skeleton avatar.
+ * @param {AvatarSize} [size='default'] - The size of the skeleton avatar.
+ * @param {string} [className] - Additional CSS classes to add to the component.
+ * @param {React.HTMLAttributes<HTMLDivElement>} [props] - Additional props to pass to the component.
+ */
 export const AvatarSkeleton: React.FC<AvatarSkeletonProps> = ({
   active = true,
   shape = 'circle',

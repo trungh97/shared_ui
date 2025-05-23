@@ -3,19 +3,32 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Skeleton } from '@components/Skeleton';
 
 const meta: Meta<typeof Skeleton> = {
-  title: 'Components/Skeleton',
+  title: 'Components/Skeleton/BaseSkeleton',
   component: Skeleton,
   argTypes: {
-    shape: {
-      control: 'select',
-      options: ['rectangle', 'circle'],
-    },
-    size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg', 'full'],
-    },
-    block: {
+    active: {
       control: 'boolean',
+      description: 'Show animation effect.',
+    },
+    avatar: {
+      control: 'boolean',
+      description: 'Show avatar placeholder.',
+    },
+    loading: {
+      control: 'boolean',
+      description: 'Display the skeleton when true.',
+    },
+    paragraph: {
+      control: 'boolean',
+      description: 'Show paragraph placeholder.',
+    },
+    round: {
+      control: 'boolean',
+      description: 'Show paragraph and title radius when true.',
+    },
+    title: {
+      control: 'boolean',
+      description: 'Show title placeholder.',
     },
   },
   parameters: {
@@ -25,36 +38,82 @@ const meta: Meta<typeof Skeleton> = {
 
 export default meta;
 
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex w-[600px] items-center justify-center">{children}</div>
+);
+
 export const Default: StoryObj<typeof Skeleton> = {
   args: {
-    shape: 'rectangle',
-    size: 'md',
-    block: false,
-    className: '',
+    active: true,
+    avatar: true,
+    loading: true,
+    paragraph: true,
+    round: false,
+    title: true,
   },
-};
-
-export const Circle: StoryObj<typeof Skeleton> = {
-  args: {
-    shape: 'circle',
-    size: 'lg',
-    block: false,
-    className: '',
-  },
-};
-
-export const FullBlock: StoryObj<typeof Skeleton> = {
-  args: {
-    shape: 'rectangle',
-    size: 'full',
-    block: true,
-    className: '',
-  },
+  render: (args) => <Skeleton {...args} />,
   decorators: [
     (Story) => (
-      <div className="flex w-screen items-center justify-center">
+      <Wrapper>
         <Story />
-      </div>
+      </Wrapper>
+    ),
+  ],
+};
+
+export const WithCustomAvatar: StoryObj<typeof Skeleton> = {
+  args: {
+    active: true,
+    avatar: { shape: 'square', size: 'default' },
+    loading: true,
+    paragraph: true,
+    round: true,
+    title: true,
+  },
+  render: (args) => <Skeleton {...args} />,
+  decorators: [
+    (Story) => (
+      <Wrapper>
+        <Story />
+      </Wrapper>
+    ),
+  ],
+};
+
+export const WithoutAvatar: StoryObj<typeof Skeleton> = {
+  args: {
+    active: true,
+    avatar: false,
+    loading: true,
+    paragraph: true,
+    round: true,
+    title: true,
+  },
+  render: (args) => <Skeleton {...args} />,
+  decorators: [
+    (Story) => (
+      <Wrapper>
+        <Story />
+      </Wrapper>
+    ),
+  ],
+};
+
+export const CustomParagraph: StoryObj<typeof Skeleton> = {
+  args: {
+    active: true,
+    avatar: true,
+    loading: true,
+    paragraph: { rows: 4, width: ['100%', '80%', '60%', '40%'] },
+    round: true,
+    title: { width: '50%' },
+  },
+  render: (args) => <Skeleton {...args} />,
+  decorators: [
+    (Story) => (
+      <Wrapper>
+        <Story />
+      </Wrapper>
     ),
   ],
 };

@@ -1,10 +1,10 @@
-import { AddIcon } from '@components/Icons';
+import { AddIcon, StarIcon } from '@components/Icons';
 import type { Meta, StoryObj } from '@storybook/react/*';
 import { fn } from '@storybook/test';
 
 const iconMeta = {
   title: 'Example/Icon',
-  component: AddIcon,
+  component: StarIcon,
   parameters: {
     layout: 'centered',
   },

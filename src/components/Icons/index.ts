@@ -8,4 +8,5 @@ export { default as BookIcon } from './BookIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as AddIcon } from './AddIcon';
 export { default as FilterIcon } from './FilterIcon';
+export { default as StarIcon } from './StarIcon';
 export * from './SocialMedia';

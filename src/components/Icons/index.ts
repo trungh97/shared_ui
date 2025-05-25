@@ -9,4 +9,5 @@ export { default as SearchIcon } from './SearchIcon';
 export { default as AddIcon } from './AddIcon';
 export { default as FilterIcon } from './FilterIcon';
 export { default as StarIcon } from './StarIcon';
+export { default as MoreIcon } from './MoreIcon';
 export * from './SocialMedia';

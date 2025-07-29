@@ -1,12 +1,20 @@
+import { formatChatDate } from '@utils/date';
+import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { Avatar } from '../Avatar';
-import { cva, VariantProps } from 'class-variance-authority';
+import { GroupPosition } from './types';
 
-const messageContainerStyles = cva('flex gap-3 p-4', {
+const messageContainerStyles = cva('flex gap-3', {
   variants: {
     type: {
       received: 'flex-row',
       sent: 'flex-row-reverse',
+    },
+    groupPosition: {
+      start: 'px-4 pt-4',
+      middle: 'px-4 py-1',
+      end: 'px-4 pb-4',
+      undefined: 'p-4',
     },
   },
 });
@@ -17,7 +25,25 @@ const messageBubbleStyles = cva('flex-1 flex flex-col gap-1.5', {
       received: 'items-start',
       sent: 'items-end',
     },
+    groupPosition: {
+      start: '',
+      middle: '',
+      end: '',
+      undefined: '',
+    },
   },
+  compoundVariants: [
+    {
+      type: 'received',
+      groupPosition: 'middle',
+      className: 'pl-[52px]',
+    },
+    {
+      type: 'received',
+      groupPosition: 'end',
+      className: 'pl-[52px]',
+    },
+  ],
 });
 
 const messageTextStyles = cva(
@@ -25,10 +51,53 @@ const messageTextStyles = cva(
   {
     variants: {
       type: {
-        received: 'bg-gray-100 text-gray-900 rounded-r-lg rounded-bl-lg',
-        sent: 'bg-brand-600 text-white rounded-l-lg rounded-br-lg',
+        received: 'bg-gray-100 text-gray-900',
+        sent: 'bg-brand-600 text-white',
+      },
+      groupPosition: {
+        start: '',
+        middle: 'rounded-lg',
+        end: '',
       },
     },
+    defaultVariants: {
+      type: 'received',
+      groupPosition: undefined,
+    },
+    compoundVariants: [
+      {
+        type: 'received',
+        groupPosition: undefined,
+        className:
+          'bg-gray-100 text-gray-900 rounded-r-lg rounded-bl-lg rounded-tl-sm',
+      },
+      {
+        type: 'sent',
+        groupPosition: undefined,
+        className:
+          'bg-brand-600 text-white rounded-l-lg rounded-tr-lg rounded-br-sm',
+      },
+      {
+        type: 'received',
+        groupPosition: 'start',
+        className: 'rounded-tl-lg rounded-r-lg rounded-bl-sm',
+      },
+      {
+        type: 'received',
+        groupPosition: 'end',
+        className: 'rounded-bl-lg rounded-r-lg rounded-tl-sm',
+      },
+      {
+        type: 'sent',
+        groupPosition: 'start',
+        className: 'rounded-tr-lg rounded-l-lg rounded-br-sm',
+      },
+      {
+        type: 'sent',
+        groupPosition: 'end',
+        className: 'rounded-br-lg rounded-l-lg rounded-tr-sm',
+      },
+    ],
   },
 );
 
@@ -59,6 +128,8 @@ export interface ChatMessageProps
   type?: 'sent' | 'received';
   /** Additional className for the container */
   className?: string;
+  /** Whether the message is the middle of a group */
+  groupPosition?: GroupPosition;
 }
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({
@@ -69,11 +140,29 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   type = 'received',
   className,
   avatarUrl = null,
+  groupPosition = undefined,
 }) => {
+  const isShowingNameAndTimestamp =
+    groupPosition === 'start' || groupPosition === undefined;
+
+  const isShowingAvatar =
+    type === 'received' &&
+    avatarUrl &&
+    groupPosition !== 'end' &&
+    groupPosition !== 'middle';
+
+  const dateTime = formatChatDate(timestamp);
+
   return (
-    <div className={messageContainerStyles({ type, className })}>
+    <div
+      className={messageContainerStyles({
+        type,
+        className,
+        groupPosition,
+      })}
+    >
       {/* Avatar with online indicator */}
-      {avatarUrl && type === 'received' && (
+      {isShowingAvatar && (
         <div className="relative h-fit w-fit flex-shrink-0">
           <Avatar imageUrl={avatarUrl} size="md" className="h-10 w-10" />
           {isOnline && (
@@ -83,19 +172,23 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
       )}
 
       {/* Message content */}
-      <div className={messageBubbleStyles({ type })}>
+      <div className={messageBubbleStyles({ type, groupPosition })}>
         {/* Name and timestamp */}
-        <div className={messageHeaderStyles({ type })}>
-          <span className="text-sm font-medium leading-5 text-gray-700">
-            {type === 'sent' ? 'You' : senderName}
-          </span>
-          <span className="leading-4.5 text-xs font-normal text-gray-600">
-            {timestamp}
-          </span>
-        </div>
+        {isShowingNameAndTimestamp && (
+          <div className={messageHeaderStyles({ type })}>
+            <span className="text-sm font-medium leading-5 text-gray-700">
+              {type === 'sent' ? 'You' : senderName}
+            </span>
+            <span className="leading-4.5 text-xs font-normal text-gray-600">
+              {dateTime}
+            </span>
+          </div>
+        )}
 
         {/* Message bubble */}
-        <div className={messageTextStyles({ type })}>{message}</div>
+        <div className={messageTextStyles({ type, groupPosition })}>
+          {message}
+        </div>
       </div>
     </div>
   );

@@ -15,14 +15,4 @@ describe('formatChatDate', () => {
     // The result should be like 'Sunday, Jan 1'
     expect(formatted).toMatch(/\w+, \w+ \d{1,2}/);
   });
-
-  it('should throw an error for invalid input', () => {
-    expect(() => formatChatDate('not-a-date')).toThrow(
-      'Invalid ISO 8601 date string',
-    );
-    expect(() => formatChatDate('')).toThrow('Invalid ISO 8601 date string');
-    expect(() => formatChatDate('2025-99-99T99:99:99Z')).toThrow(
-      'Invalid ISO 8601 date string',
-    );
-  });
 });

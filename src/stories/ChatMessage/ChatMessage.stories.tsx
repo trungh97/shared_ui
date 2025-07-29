@@ -39,7 +39,7 @@ export const SentMessage: Story = {
     avatarUrl: 'https://avatar.iran.liara.run/public/8',
     senderName: 'You',
     message: "Sure, I'll take a look at it this afternoon!",
-    timestamp: '2025-07-27T18:01:00Z',
+    timestamp: '2025-07-28T12:46:49.109Z',
     isOnline: false,
     type: 'sent',
   },

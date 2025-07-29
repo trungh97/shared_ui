@@ -117,7 +117,7 @@ export interface ChatMessageProps
   // if the type is 'sent', the avatar can be null
   avatarUrl: string | null;
   /** The name of the message sender */
-  senderName: string;
+  senderName?: string | null;
   /** The message content */
   message: string;
   /** The timestamp for the message */

@@ -12,8 +12,8 @@ const messageContainerStyles = cva('flex gap-3', {
     },
     groupPosition: {
       start: 'px-4 pt-4',
-      middle: 'px-4 py-1',
-      end: 'px-4 pb-4',
+      middle: 'px-4 pt-1',
+      end: 'px-4 pt-1 pb-4',
       undefined: 'p-4',
     },
   },

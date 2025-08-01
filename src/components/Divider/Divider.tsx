@@ -10,15 +10,18 @@ export interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Divider = forwardRef<HTMLDivElement, DividerProps>(
-  ({
-    orientation = 'horizontal',
-    thickness = '1px',
-    color = 'black',
-    length = '100%',
-    className,
-    style,
-    ...props
-  }) => {
+  (
+    {
+      orientation = 'horizontal',
+      thickness = '1px',
+      color = 'black',
+      length = '100%',
+      className,
+      style,
+      ...props
+    },
+    ref,
+  ) => {
     const sharedStyles: React.CSSProperties = {
       borderRadius: '2px',
     };
@@ -40,6 +43,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(
 
     return (
       <div
+        ref={ref}
         className={clsx('shrink-0', className)}
         style={{ ...sharedStyles, ...defaultStyle, ...style }}
         {...props}

@@ -1,8 +1,8 @@
 import { ErrorCircleIcon } from '@components/Icons';
 import { cva, VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
-import React, { forwardRef, ReactElement, ReactNode } from 'react';
-import { InputVariant } from './types';
+import React, { forwardRef, ReactNode } from 'react';
+import { TextAreaVariant } from './types';
 
 const styles = cva(
   [
@@ -70,34 +70,32 @@ const dropdown = cva('', {
   variants: {},
 });
 
-export interface InputElementProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+export interface TextAreaElementProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     VariantProps<typeof inputElementStyles> {}
 
-const InputElement = forwardRef<HTMLInputElement, InputElementProps>(
+const TextAreaElement = forwardRef<HTMLTextAreaElement, TextAreaElementProps>(
   (props, ref) => {
-    return <input ref={ref} {...props} />;
+    return <textarea ref={ref} {...props} />;
   },
 );
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+export interface TextAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     VariantProps<typeof styles> {
-  variant?: InputVariant;
+  variant?: TextAreaVariant;
   disabled?: boolean;
-  icon?: ReactElement;
   message?: string;
   label?: ReactNode;
   wrapperClassName?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       variant = 'default',
       className,
       disabled,
-      icon,
       message,
       label,
       wrapperClassName,
@@ -111,10 +109,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <label className="text-sm font-medium text-gray-700">{label}</label>
         )}
         <div className={styles({ variant, disabled, className })}>
-          {icon && variant === 'leading-icon' && (
-            <span className={inputIcon()}>{icon}</span>
-          )}
-          <InputElement
+          <TextAreaElement
             className={inputElementStyles({ className })}
             ref={ref}
             disabled={disabled}
@@ -125,9 +120,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               <ErrorCircleIcon />
             </span>
           )}
-          {icon && variant === 'trailing-icon' && (
-            <span className={inputIcon()}>{icon}</span>
-          )}
         </div>
         {variant === 'error' && (
           <span className="text-sm text-error-500">{message}</span>
@@ -137,4 +129,4 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-export default Input;
+export default TextArea;

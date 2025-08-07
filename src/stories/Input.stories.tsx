@@ -27,5 +27,6 @@ export const Standard: Story = {
     disabled: false,
     icon: <MailIcon />,
     message: 'This is an error message',
+    className: 'bg-brand-700',
   },
 };

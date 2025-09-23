@@ -2,7 +2,7 @@ import { formatChatDate } from '@utils/date';
 import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { Avatar } from '../Avatar';
-import { GroupPosition } from './types';
+import { GroupPosition, MessageStatus, MessageStatusText } from './types';
 
 const messageContainerStyles = cva('flex gap-3', {
   variants: {
@@ -130,6 +130,10 @@ export interface ChatMessageProps
   className?: string;
   /** Whether the message is the middle of a group */
   groupPosition?: GroupPosition;
+  /** Message status */
+  status?: MessageStatus;
+  /** Whether to show the message status */
+  showStatus?: boolean;
 }
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({
@@ -141,6 +145,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   className,
   avatarUrl = null,
   groupPosition = undefined,
+  status = MessageStatus.SENT,
+  showStatus = false,
 }) => {
   const isShowingNameAndTimestamp =
     groupPosition === 'start' || groupPosition === undefined;
@@ -189,6 +195,13 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         <div className={messageTextStyles({ type, groupPosition })}>
           {message}
         </div>
+
+        {/* Message status text */}
+        {showStatus && (
+          <div className="mt-1 min-h-[18px] text-xs text-gray-500">
+            {MessageStatusText[status]}
+          </div>
+        )}
       </div>
     </div>
   );

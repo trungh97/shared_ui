@@ -1,10 +1,10 @@
-import { AddIcon, StarIcon } from '@components/Icons';
+import { AddIcon, SendIcon } from '@components/Icons';
 import type { Meta, StoryObj } from '@storybook/react/*';
 import { fn } from '@storybook/test';
 
 const iconMeta = {
   title: 'Example/Icon',
-  component: StarIcon,
+  component: SendIcon,
   parameters: {
     layout: 'centered',
   },
@@ -21,5 +21,6 @@ type SearchIconStory = StoryObj<typeof iconMeta>;
 export const Standard: SearchIconStory = {
   args: {
     color: 'red',
+    transform: 'scale(0.75)',
   },
 };

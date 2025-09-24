@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ChatMessage } from './ChatMessage';
+import { MessageStatus, MessageType } from './types';
 
 describe('ChatMessage', () => {
   it('renders received message with avatar, name, and timestamp', () => {
@@ -127,5 +128,43 @@ describe('ChatMessage', () => {
     // The outermost div should have the custom class
     const outerDiv = container.firstChild as HTMLElement;
     expect(outerDiv.className).toMatch(/custom-class-test/);
+  });
+
+  it('shows correct status text for each message status', () => {
+    const baseProps = {
+      avatarUrl: null,
+      message: 'Status message',
+      timestamp: '2025-07-27T18:01:00Z',
+      type: 'received' as MessageType,
+    };
+
+    const statusCases = [
+      { status: MessageStatus.SENDING, expected: 'Sending' },
+      { status: MessageStatus.SENT, expected: 'Sent' },
+      { status: MessageStatus.DELIVERED, expected: 'Delivered' },
+      { status: MessageStatus.SEEN, expected: 'Seen' },
+      { status: MessageStatus.ERROR, expected: 'Error' },
+    ];
+
+    statusCases.forEach(({ status, expected }) => {
+      render(<ChatMessage {...baseProps} status={status} showStatus />);
+      expect(screen.getByText(expected)).toBeInTheDocument();
+      cleanup();
+    });
+  });
+
+  it('renders sent message without avatar even when avatarUrl is provided', () => {
+    render(
+      <ChatMessage
+        avatarUrl="https://avatar.iran.liara.run/public/8"
+        senderName="You"
+        message="Hi!"
+        timestamp="2025-07-27T18:01:00Z"
+        isOnline={false}
+        type="sent"
+      />,
+    );
+    expect(screen.getByText('You')).toBeInTheDocument();
+    expect(screen.getByText('Hi!')).toBeInTheDocument();
   });
 });

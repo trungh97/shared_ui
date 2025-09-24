@@ -2,7 +2,12 @@ import { formatChatDate } from '@utils/date';
 import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { Avatar } from '../Avatar';
-import { GroupPosition, MessageStatus, MessageStatusText } from './types';
+import {
+  GroupPosition,
+  MessageStatus,
+  MessageStatusText,
+  MessageType,
+} from './types';
 
 const messageContainerStyles = cva('flex gap-3', {
   variants: {
@@ -125,7 +130,7 @@ export interface ChatMessageProps
   /** Whether the sender is online */
   isOnline?: boolean;
   /** Message type - received or sent */
-  type?: 'sent' | 'received';
+  type?: MessageType;
   /** Additional className for the container */
   className?: string;
   /** Whether the message is the middle of a group */

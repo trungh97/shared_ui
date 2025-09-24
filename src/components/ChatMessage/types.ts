@@ -7,6 +7,8 @@ export enum MessageStatus {
   ERROR = 'ERROR',
 }
 
+export type MessageType = 'sent' | 'received';
+
 export const MessageStatusText: {
   [key in MessageStatus]: string;
 } = {

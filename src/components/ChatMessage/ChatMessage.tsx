@@ -1,8 +1,14 @@
 import { formatChatDate } from '@utils/date';
 import { cva, VariantProps } from 'class-variance-authority';
+import { clsx } from 'clsx';
 import React from 'react';
 import { Avatar } from '../Avatar';
-import { GroupPosition } from './types';
+import {
+  GroupPosition,
+  MessageStatus,
+  MessageStatusText,
+  MessageType,
+} from './types';
 
 const messageContainerStyles = cva('flex gap-3', {
   variants: {
@@ -125,11 +131,19 @@ export interface ChatMessageProps
   /** Whether the sender is online */
   isOnline?: boolean;
   /** Message type - received or sent */
-  type?: 'sent' | 'received';
+  type?: MessageType;
   /** Additional className for the container */
   className?: string;
   /** Whether the message is the middle of a group */
   groupPosition?: GroupPosition;
+  /** Message status */
+  status?: MessageStatus;
+  /** Whether to show the message status */
+  showStatus?: boolean;
+  /** Custom status text, e.g. "Seen by Bob, Alice". Defaults to the text for `status`. */
+  statusText?: string;
+  /** Called when the user retries a message whose status is `ERROR`. Shows a Retry action. */
+  onRetry?: () => void;
 }
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({
@@ -141,6 +155,10 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   className,
   avatarUrl = null,
   groupPosition = undefined,
+  status = MessageStatus.SENT,
+  showStatus = false,
+  statusText,
+  onRetry,
 }) => {
   const isShowingNameAndTimestamp =
     groupPosition === 'start' || groupPosition === undefined;
@@ -189,6 +207,29 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         <div className={messageTextStyles({ type, groupPosition })}>
           {message}
         </div>
+
+        {/* Message status text */}
+        {showStatus && (
+          <div
+            className={clsx(
+              'mt-1 min-h-[18px] text-xs',
+              status === MessageStatus.ERROR
+                ? 'text-error-600'
+                : 'text-gray-500',
+            )}
+          >
+            {statusText ?? MessageStatusText[status]}
+            {status === MessageStatus.ERROR && onRetry && (
+              <button
+                type="button"
+                onClick={onRetry}
+                className="ml-1 font-medium underline hover:text-error-700"
+              >
+                Retry
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

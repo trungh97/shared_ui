@@ -1,5 +1,6 @@
 import { formatChatDate } from '@utils/date';
 import { cva, VariantProps } from 'class-variance-authority';
+import { clsx } from 'clsx';
 import React from 'react';
 import { Avatar } from '../Avatar';
 import {
@@ -139,6 +140,10 @@ export interface ChatMessageProps
   status?: MessageStatus;
   /** Whether to show the message status */
   showStatus?: boolean;
+  /** Custom status text, e.g. "Seen by Bob, Alice". Defaults to the text for `status`. */
+  statusText?: string;
+  /** Called when the user retries a message whose status is `ERROR`. Shows a Retry action. */
+  onRetry?: () => void;
 }
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({
@@ -152,6 +157,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   groupPosition = undefined,
   status = MessageStatus.SENT,
   showStatus = false,
+  statusText,
+  onRetry,
 }) => {
   const isShowingNameAndTimestamp =
     groupPosition === 'start' || groupPosition === undefined;
@@ -203,8 +210,24 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
         {/* Message status text */}
         {showStatus && (
-          <div className="mt-1 min-h-[18px] text-xs text-gray-500">
-            {MessageStatusText[status]}
+          <div
+            className={clsx(
+              'mt-1 min-h-[18px] text-xs',
+              status === MessageStatus.ERROR
+                ? 'text-error-600'
+                : 'text-gray-500',
+            )}
+          >
+            {statusText ?? MessageStatusText[status]}
+            {status === MessageStatus.ERROR && onRetry && (
+              <button
+                type="button"
+                onClick={onRetry}
+                className="ml-1 font-medium underline hover:text-error-700"
+              >
+                Retry
+              </button>
+            )}
           </div>
         )}
       </div>

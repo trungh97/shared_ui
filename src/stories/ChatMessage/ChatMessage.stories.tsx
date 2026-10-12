@@ -52,6 +52,30 @@ export const SentMessage: Story = {
   },
 };
 
+export const SeenByInGroup: Story = {
+  args: {
+    avatarUrl: null,
+    message: 'Does Friday work for everyone?',
+    timestamp: '2025-07-28T12:46:49.109Z',
+    type: 'sent',
+    showStatus: true,
+    status: MessageStatus.SEEN,
+    statusText: 'Seen by Bob, Alice and 2 others',
+  },
+};
+
+export const FailedMessage: Story = {
+  args: {
+    avatarUrl: null,
+    message: 'This one could not be sent',
+    timestamp: '2025-07-28T12:46:49.109Z',
+    type: 'sent',
+    showStatus: true,
+    status: MessageStatus.ERROR,
+    onRetry: () => {},
+  },
+};
+
 export const OfflineUser: Story = {
   args: {
     avatarUrl: 'https://avatar.iran.liara.run/public/8',

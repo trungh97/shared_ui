@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ChatMessage } from './ChatMessage';
 import { MessageStatus, MessageType } from './types';
@@ -151,6 +151,56 @@ describe('ChatMessage', () => {
       expect(screen.getByText(expected)).toBeInTheDocument();
       cleanup();
     });
+  });
+
+  it('shows custom status text instead of the default text', () => {
+    render(
+      <ChatMessage
+        avatarUrl={null}
+        message="Hi all"
+        timestamp="2025-07-27T18:01:00Z"
+        type="sent"
+        status={MessageStatus.SEEN}
+        statusText="Seen by Bob, Alice"
+        showStatus
+      />,
+    );
+    expect(screen.getByText('Seen by Bob, Alice')).toBeInTheDocument();
+    expect(screen.queryByText('Seen')).not.toBeInTheDocument();
+  });
+
+  it('shows a Retry action for a failed message and calls onRetry', () => {
+    const onRetry = jest.fn();
+    render(
+      <ChatMessage
+        avatarUrl={null}
+        message="Failed message"
+        timestamp="2025-07-27T18:01:00Z"
+        type="sent"
+        status={MessageStatus.ERROR}
+        showStatus
+        onRetry={onRetry}
+      />,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Retry' }));
+    expect(onRetry).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not show Retry when the message has not failed', () => {
+    render(
+      <ChatMessage
+        avatarUrl={null}
+        message="Sending message"
+        timestamp="2025-07-27T18:01:00Z"
+        type="sent"
+        status={MessageStatus.SENDING}
+        showStatus
+        onRetry={jest.fn()}
+      />,
+    );
+    expect(
+      screen.queryByRole('button', { name: 'Retry' }),
+    ).not.toBeInTheDocument();
   });
 
   it('renders sent message without avatar even when avatarUrl is provided', () => {

@@ -7,3 +7,4 @@ clover.xml
 coverage-final.json
 *storybook.log
 *.tgz
+.env

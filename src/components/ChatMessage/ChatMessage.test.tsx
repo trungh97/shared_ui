@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ChatMessage } from './ChatMessage';
+import { MessageStatus, MessageType } from './types';
 
 describe('ChatMessage', () => {
   it('renders received message with avatar, name, and timestamp', () => {
@@ -127,5 +128,93 @@ describe('ChatMessage', () => {
     // The outermost div should have the custom class
     const outerDiv = container.firstChild as HTMLElement;
     expect(outerDiv.className).toMatch(/custom-class-test/);
+  });
+
+  it('shows correct status text for each message status', () => {
+    const baseProps = {
+      avatarUrl: null,
+      message: 'Status message',
+      timestamp: '2025-07-27T18:01:00Z',
+      type: 'received' as MessageType,
+    };
+
+    const statusCases = [
+      { status: MessageStatus.SENDING, expected: 'Sending' },
+      { status: MessageStatus.SENT, expected: 'Sent' },
+      { status: MessageStatus.DELIVERED, expected: 'Delivered' },
+      { status: MessageStatus.SEEN, expected: 'Seen' },
+      { status: MessageStatus.ERROR, expected: 'Error' },
+    ];
+
+    statusCases.forEach(({ status, expected }) => {
+      render(<ChatMessage {...baseProps} status={status} showStatus />);
+      expect(screen.getByText(expected)).toBeInTheDocument();
+      cleanup();
+    });
+  });
+
+  it('shows custom status text instead of the default text', () => {
+    render(
+      <ChatMessage
+        avatarUrl={null}
+        message="Hi all"
+        timestamp="2025-07-27T18:01:00Z"
+        type="sent"
+        status={MessageStatus.SEEN}
+        statusText="Seen by Bob, Alice"
+        showStatus
+      />,
+    );
+    expect(screen.getByText('Seen by Bob, Alice')).toBeInTheDocument();
+    expect(screen.queryByText('Seen')).not.toBeInTheDocument();
+  });
+
+  it('shows a Retry action for a failed message and calls onRetry', () => {
+    const onRetry = jest.fn();
+    render(
+      <ChatMessage
+        avatarUrl={null}
+        message="Failed message"
+        timestamp="2025-07-27T18:01:00Z"
+        type="sent"
+        status={MessageStatus.ERROR}
+        showStatus
+        onRetry={onRetry}
+      />,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Retry' }));
+    expect(onRetry).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not show Retry when the message has not failed', () => {
+    render(
+      <ChatMessage
+        avatarUrl={null}
+        message="Sending message"
+        timestamp="2025-07-27T18:01:00Z"
+        type="sent"
+        status={MessageStatus.SENDING}
+        showStatus
+        onRetry={jest.fn()}
+      />,
+    );
+    expect(
+      screen.queryByRole('button', { name: 'Retry' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('renders sent message without avatar even when avatarUrl is provided', () => {
+    render(
+      <ChatMessage
+        avatarUrl="https://avatar.iran.liara.run/public/8"
+        senderName="You"
+        message="Hi!"
+        timestamp="2025-07-27T18:01:00Z"
+        isOnline={false}
+        type="sent"
+      />,
+    );
+    expect(screen.getByText('You')).toBeInTheDocument();
+    expect(screen.getByText('Hi!')).toBeInTheDocument();
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FacebookSignInButton } from '@components/Button/SocialButton';
-import type { Meta, StoryObj } from '@storybook/react/*';
+import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 const facebookMeta = {

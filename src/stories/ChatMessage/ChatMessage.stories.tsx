@@ -1,4 +1,5 @@
 import React from 'react';
+import { MessageStatus } from '@components/ChatMessage/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChatMessage } from '../../components/ChatMessage';
 
@@ -15,6 +16,10 @@ const meta: Meta<typeof ChatMessage> = {
     },
     isOnline: {
       control: { type: 'boolean' },
+    },
+    status: {
+      control: { type: 'select' },
+      options: Object.keys(MessageStatus),
     },
   },
 };
@@ -42,6 +47,32 @@ export const SentMessage: Story = {
     timestamp: '2025-07-28T12:46:49.109Z',
     isOnline: false,
     type: 'sent',
+    showStatus: true,
+    status: MessageStatus.SENT,
+  },
+};
+
+export const SeenByInGroup: Story = {
+  args: {
+    avatarUrl: null,
+    message: 'Does Friday work for everyone?',
+    timestamp: '2025-07-28T12:46:49.109Z',
+    type: 'sent',
+    showStatus: true,
+    status: MessageStatus.SEEN,
+    statusText: 'Seen by Bob, Alice and 2 others',
+  },
+};
+
+export const FailedMessage: Story = {
+  args: {
+    avatarUrl: null,
+    message: 'This one could not be sent',
+    timestamp: '2025-07-28T12:46:49.109Z',
+    type: 'sent',
+    showStatus: true,
+    status: MessageStatus.ERROR,
+    onRetry: () => {},
   },
 };
 

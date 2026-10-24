@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { vi } from 'date-fns/locale';
 import { ChatMessage } from './ChatMessage';
 import { MessageStatus, MessageType } from './types';
 
@@ -216,5 +217,55 @@ describe('ChatMessage', () => {
     );
     expect(screen.getByText('You')).toBeInTheDocument();
     expect(screen.getByText('Hi!')).toBeInTheDocument();
+  });
+
+  describe('localisation', () => {
+    it('uses a custom Retry label', () => {
+      render(
+        <ChatMessage
+          avatarUrl={null}
+          message="Failed message"
+          timestamp="2025-07-27T18:01:00Z"
+          type="sent"
+          status={MessageStatus.ERROR}
+          showStatus
+          onRetry={jest.fn()}
+          retryLabel="Thử lại"
+        />,
+      );
+      expect(
+        screen.getByRole('button', { name: 'Thử lại' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'Retry' }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('uses a custom label for the current user', () => {
+      render(
+        <ChatMessage
+          avatarUrl={null}
+          message="Hi!"
+          timestamp="2025-07-27T18:01:00Z"
+          type="sent"
+          selfLabel="Bạn"
+        />,
+      );
+      expect(screen.getByText('Bạn')).toBeInTheDocument();
+      expect(screen.queryByText('You')).not.toBeInTheDocument();
+    });
+
+    it('formats the timestamp with the given locale', () => {
+      render(
+        <ChatMessage
+          avatarUrl={null}
+          message="Hi!"
+          timestamp="2023-01-01T12:00:00Z"
+          type="sent"
+          locale={vi}
+        />,
+      );
+      expect(screen.getByText(/^Chủ Nhật, thg 1 1$/)).toBeInTheDocument();
+    });
   });
 });

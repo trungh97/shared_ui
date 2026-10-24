@@ -1,6 +1,7 @@
 import React from 'react';
 import { MessageStatus } from '@components/ChatMessage/types';
 import type { Meta, StoryObj } from '@storybook/react';
+import { vi } from 'date-fns/locale';
 import { ChatMessage } from '../../components/ChatMessage';
 
 const meta: Meta<typeof ChatMessage> = {
@@ -20,6 +21,15 @@ const meta: Meta<typeof ChatMessage> = {
     status: {
       control: { type: 'select' },
       options: Object.keys(MessageStatus),
+    },
+    retryLabel: {
+      control: { type: 'text' },
+    },
+    selfLabel: {
+      control: { type: 'text' },
+    },
+    locale: {
+      control: false,
     },
   },
 };
@@ -72,6 +82,22 @@ export const FailedMessage: Story = {
     type: 'sent',
     showStatus: true,
     status: MessageStatus.ERROR,
+    onRetry: () => {},
+  },
+};
+
+export const Localized: Story = {
+  args: {
+    avatarUrl: null,
+    message: 'Tin nhắn này chưa gửi được',
+    timestamp: '2025-07-28T12:46:49.109Z',
+    type: 'sent',
+    showStatus: true,
+    status: MessageStatus.ERROR,
+    statusText: 'Lỗi',
+    retryLabel: 'Thử lại',
+    selfLabel: 'Bạn',
+    locale: vi,
     onRetry: () => {},
   },
 };

@@ -1,3 +1,4 @@
+import { vi } from 'date-fns/locale';
 import { formatChatDate } from '../date';
 
 describe('formatChatDate', () => {
@@ -14,5 +15,10 @@ describe('formatChatDate', () => {
     const formatted = formatChatDate(date.toISOString());
     // The result should be like 'Sunday, Jan 1'
     expect(formatted).toMatch(/\w+, \w+ \d{1,2}/);
+  });
+
+  it('should format previous day with the given locale', () => {
+    const formatted = formatChatDate('2023-01-01T12:00:00Z', vi);
+    expect(formatted).toMatch(/^Chủ Nhật, thg 1 1$/);
   });
 });

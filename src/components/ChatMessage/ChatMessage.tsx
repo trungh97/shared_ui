@@ -1,6 +1,7 @@
 import { formatChatDate } from '@utils/date';
 import { cva, VariantProps } from 'class-variance-authority';
 import { clsx } from 'clsx';
+import { Locale } from 'date-fns';
 import React from 'react';
 import { Avatar } from '../Avatar';
 import {
@@ -144,6 +145,12 @@ export interface ChatMessageProps
   statusText?: string;
   /** Called when the user retries a message whose status is `ERROR`. Shows a Retry action. */
   onRetry?: () => void;
+  /** Label of the Retry action. Defaults to "Retry". */
+  retryLabel?: string;
+  /** Name shown above the current user's own messages. Defaults to "You". */
+  selfLabel?: string;
+  /** date-fns locale used to format the timestamp. Defaults to English. */
+  locale?: Locale;
 }
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({
@@ -159,6 +166,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   showStatus = false,
   statusText,
   onRetry,
+  retryLabel = 'Retry',
+  selfLabel = 'You',
+  locale,
 }) => {
   const isShowingNameAndTimestamp =
     groupPosition === 'start' || groupPosition === undefined;
@@ -169,7 +179,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
     groupPosition !== 'end' &&
     groupPosition !== 'middle';
 
-  const dateTime = formatChatDate(timestamp);
+  const dateTime = formatChatDate(timestamp, locale);
 
   return (
     <div
@@ -195,7 +205,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         {isShowingNameAndTimestamp && (
           <div className={messageHeaderStyles({ type })}>
             <span className="text-sm font-medium leading-5 text-gray-700">
-              {type === 'sent' ? 'You' : senderName}
+              {type === 'sent' ? selfLabel : senderName}
             </span>
             <span className="leading-4.5 text-xs font-normal text-gray-600">
               {dateTime}
@@ -225,7 +235,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
                 onClick={onRetry}
                 className="ml-1 font-medium underline hover:text-error-700"
               >
-                Retry
+                {retryLabel}
               </button>
             )}
           </div>

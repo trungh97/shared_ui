@@ -10,3 +10,4 @@ export * from './ChatMessage';
 export * from './Divider';
 export * from './Popover';
 export * from './Skeleton';
+export * from './Modal';

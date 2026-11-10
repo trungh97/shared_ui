@@ -16,6 +16,7 @@ export const buttonIcon = cva('inline-flex items-center justify-center', {
     intent: {
       primary: 'stroke-white',
       secondary: 'stroke-brand-700',
+      ghost: 'stroke-current',
     },
     iconOnly: {
       true: ['!mr-0', '!ml-0'],

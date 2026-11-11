@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@components/Button';
-import { SampleIcon } from '@components/Icons';
+import { AddIcon, SampleIcon } from '@components/Icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
@@ -70,5 +70,28 @@ export const IconOnly: Story = {
       iconOnly: true,
     },
     size: 'lg',
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    intent: 'ghost',
+    label: 'Button CTA',
+    icon: {
+      content: <SampleIcon />,
+    },
+    size: 'sm',
+  },
+};
+
+export const GhostIconOnly: Story = {
+  args: {
+    intent: 'ghost',
+    'aria-label': 'New chat',
+    icon: {
+      content: <AddIcon />,
+      iconOnly: true,
+    },
+    size: 'sm',
   },
 };
